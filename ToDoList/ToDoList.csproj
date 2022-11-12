@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ProjectGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  <!-- <OutputType>Exe</OutputType> only needed if project has a UI-->
+  </ProjectGroup>
+</Project>
