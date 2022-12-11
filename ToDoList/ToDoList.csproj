@@ -3,6 +3,11 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
   <!-- <OutputType>Exe</OutputType> only needed if project has a UI-->
+  <!-- <implicitUsings>enable</ImplicitUsings> if you don't want to explicityly type out directives-->
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MySqlConnector" Version="2.2.0" />
+  </ItemGroup>
 
 </Project>

@@ -13,3 +13,4 @@ coverage/
 .env
 obj 
 bin
+appsettings.json
