@@ -6,7 +6,7 @@ namespace ToDoList.Models
   public class Item
   {
     public string Description { get; set; }
-    public int Id { get; }
+    public int Id { get; set; }
     public Item(string description)
     {
       Description = description;
@@ -16,6 +16,26 @@ namespace ToDoList.Models
     {
       Description = description;
       Id = id;
+    }
+
+    public override bool Equals(System.Object otherItem)
+    {
+      if (!(otherItem is Item))
+      {
+        return false;
+      }
+      else
+      {
+        Item newItem = (Item) otherItem;
+        bool idEquality = (this.Id == newItem.Id);
+        bool descriptionEquality = (this.Description == newItem.Description);
+        return descriptionEquality;
+      }
+    }
+
+    public override int GetHashCode()
+    {
+      return Id.GetHashCode();
     }
 
     public static List<Item> GetAll()
@@ -60,10 +80,58 @@ namespace ToDoList.Models
       }
     }
 
-    public static Item Find(int searchId)
+    public static Item Find(int id)
     {
-      Item placeholderItem = new Item("placeholder Item");
-      return placeholderItem;
+      MySqlConnection conn = new MySqlConnection(DBConfiguration.ConnectionString);
+      conn.Open();
+
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = "SELECT * FROM items WHERE id = @ThisId;";
+
+      MySqlParameter param = new MySqlParameter();
+      param.ParameterName = "@ThisId";
+      param.Value = id;
+      cmd.Parameters.Add(param);
+
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      int itemId = 0;
+      string itemDescription = "";
+      while (rdr.Read())
+      {
+        itemId = rdr.GetInt32(0);
+        itemDescription = rdr.GetString(1);
+      }
+      Item foundItem = new Item(itemDescription, itemId);
+
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+  
+      return foundItem;
+    }
+
+    public void Save()
+    {
+      MySqlConnection conn = new MySqlConnection(DBConfiguration.ConnectionString);
+      conn.Open();
+
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+
+      cmd.CommandText = "INSERT INTO items (description) VALUES (@ItemDescription);";
+      MySqlParameter param = new MySqlParameter();
+      param.ParameterName = "@ItemDescription";
+      param.Value = this.Description;
+      cmd.Parameters.Add(param);
+      cmd.ExecuteNonQuery();
+      Id = (int) cmd.LastInsertedId;
+
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
     }
   }
 }
