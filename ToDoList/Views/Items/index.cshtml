@@ -3,6 +3,7 @@
 }
 
 @using ToDoList.Models;
+@model List<ToDoList.Models.Item>;
 
 <h1>Items</h1>
 
@@ -24,3 +25,4 @@
 } -->
 
 <p>@Html.ActionLink("Add new item", "Create")</p>
+<p>@Html.ActionLink("Home","Index","Home")</p>
