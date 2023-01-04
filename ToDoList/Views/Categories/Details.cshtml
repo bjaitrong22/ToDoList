@@ -33,7 +33,6 @@
           {
             tagList.Add(join.Tag.Title);
           }
-
           tags = String.Join(", ", tagList);
         }
         <li>@item.Description | Tags: @tags</li>
@@ -43,5 +42,5 @@
   <p>@Html.ActionLink("Edit Category", "Edit", new {id = Model.CategoryId})</p>
   <p>@Html.ActionLink("Delete Category", "Delete", new { id = Model.CategoryId })</p>
   <p>@Html.ActionLink("Back to categories", "Index")</p>
-  <p>@Html.ActionLink("Add new item", "Create", "Item")</p>
+  <p>@Html.ActionLink("Add new item", "Create", "Items")</p>
 </div>

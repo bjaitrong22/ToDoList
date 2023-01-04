@@ -18,14 +18,19 @@ else
 {
   <h4>This item has the following tags:</h4>
   <ul>
-    @foreach(ItemTag Join in Model.JoinEntities)
+    @foreach(ItemTag join in Model.JoinEntities)
     {
-      <li>Tag: @Join.Tag.Title</li>
+      <li>Tag: @join.Tag.Title</li>
+      @using (Html.BeginForm("DeleteJoin", "Items"))
+      {
+        @Html.Hidden("joinId", @join.ItemTagId)
+        <input type="sumit" value="Delete"/>
+      }
     }
   </ul>
 }
 
 <p>@Html.ActionLink("Edit Item", "Edit", new {id = Model.ItemId})</p>
 <p>@Html.ActionLink("Delete Item", "Delete", new { id = Model.ItemId })</p>
-<p>@Html.ActionLink("Back to list", "Index")</p>
 <p>@Html.ActionLink("Add a Tag", "AddTag", new { id= Model.ItemId})</p>
+<p>@Html.ActionLink("Back to list", "Index")</p>

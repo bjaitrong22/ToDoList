@@ -16,11 +16,16 @@
   }
   else
   {
-    <h4>Items the tag belons to:</h4>
+    <h4>Items the tag belongs to:</h4>
     <ul>
       @foreach(ItemTag join in Model.JoinEntities)
       {
         <li>@join.Item.Description</li>
+        @using (Html.BeginForm("DeleteJoin", "Tags"))
+        {
+          @Html.Hidden("joinId", @join.ItemTagId)
+          <input type="submit" value="Delete"?/>
+        }
       }
     </ul>
   }
