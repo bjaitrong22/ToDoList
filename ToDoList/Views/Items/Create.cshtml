@@ -15,6 +15,5 @@
 
   <input type="submit" value="Add new task" class="btn btn-default"/>
 }
-<p><strong>NOTE:</strong>You need to have at least one category before you can add an item!</p>
-<p>Go to @Html.ActionLink("this page", "Create", "Categories") to create a category.</p>
+<p>@Html.ValidationMessageFor(model => model.CategoryId,"",new {@class = "text-danger", @style ="font-weight: 600;"})</p>
 <p>@Html.ActionLink("Show all items", "Index")</p>
