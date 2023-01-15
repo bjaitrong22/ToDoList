@@ -9,6 +9,7 @@
   {
     @Html.LabelFor(model => model.Name)
     @Html.TextBoxFor(model => model.Name)
+    <p>@Html.ValidationMessageFor(model => model.Name,"", new {@class= "text-danger",@style ="font-weight: 600;"})</p>
     <input type="submit" value="Add new category"/>
   }
   <p>@Html.ActionLink("Show all categories", "Index")</p>
