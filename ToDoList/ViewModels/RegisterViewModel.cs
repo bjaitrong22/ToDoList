@@ -6,16 +6,17 @@ namespace ToDoList.ViewModels
   {
     [Required]
     [EmailAddress]
-    [Display(Name = "Email Address")]
+    [Display(Name = "Email Address: ")]
     public string Email { get; set; }
 
     [Required]
     [DataType(DataType.Password)]
+    [Display(Name = "Password: ")]
     public string Password { get; set; }
 
     [Required]
     [DataType(DataType.Password)]
-    [Display(Name = "Confirm password")]
+    [Display(Name = "Confirm password: ")]
     [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
     public string ConfirmPassword { get; set; }
   }
