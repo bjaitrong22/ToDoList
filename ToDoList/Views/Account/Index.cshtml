@@ -9,6 +9,10 @@
   @if (User.Identity.IsAuthenticated)
   {
     <p>Hello @User.Identity.Name!</p>
+    @using (Html.BeginForm("Logoff", "Account"))
+    {
+      <input type="submit" class="btn btn-primary" value="log out" />
+    }
   }
   else
   {
